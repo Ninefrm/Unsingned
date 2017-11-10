@@ -9,3 +9,4 @@ UNSINGNED, THE GAME.
 * Zarmirez.
 * Quorthom.
 * VicenteRamirez.
+* Hristam.
