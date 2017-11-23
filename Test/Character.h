@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include <ncurses.h>
+#include <curses.h>
 #include <cstdlib>
 #include <unistd.h>
 

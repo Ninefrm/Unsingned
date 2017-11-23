@@ -36,7 +36,7 @@ bool Character::collision(){
   }
   	//collision con los 1
   if(P[0].x==Up.x && P[0].y==Up.y){
-  	get=true;
+  	//get=true;
   	putObj();
 		points+=10;
 		move(maxheight-1,0);
@@ -71,7 +71,7 @@ void Character::moveCharacter(){
   		break;
   }
   if(!get){
-    //move(P[P.size()-1].y, P[P.size()-1].x);
+    move(P[P.size()-1].y, P[P.size()-1].x);
     printw(" ");
     refresh();
     P.pop_back();
@@ -102,8 +102,8 @@ Character::Character(){
   etel='1';
   Up.x=0;
   Up.y=0;
-  for(int i=0;i<5;i++)
-    P.push_back(Obj(40+i,10));
+  //for(int i=0;i<5;i++)
+  P.push_back(Obj(40,10));
   points=0;
   del=110000;
   get=0;
