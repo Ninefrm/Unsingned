@@ -51,32 +51,32 @@ void Character::moveCharacter(){
   int tmp=getch(); //TMP Será nuestra tecla oprimida.
   switch(tmp){
     case KEY_LEFT:
-  	 if(direction!='r')
+  	 //if(direction!='r')
   			direction='l';
         break;
   	case KEY_UP:
-  		if(direction!='d')
+  		//if(direction!='d')
   			direction='u';
   			break;
   	case KEY_DOWN:
-  		if(direction!='u')
+  		//if(direction!='u')
   			direction='d';
   			break;
 		case KEY_RIGHT:
-  		if(direction!='l')
+  		//if(direction!='l')
   			direction='r';
   		    break;
   	case KEY_BACKSPACE: //Barra para salir
   		direction='q';
   		break;
   }
+
   if(!get){
     move(P[P.size()-1].y, P[P.size()-1].x);
     printw(" ");
     refresh();
     P.pop_back();
   }
-
   if(direction=='l'){ //Cuando es Izquierda
     P.insert(P.begin(),Obj(P[0].x-1,P[0].y));
   }else if(direction=='r'){ //Derecha
@@ -86,13 +86,14 @@ void Character::moveCharacter(){
   }else if(direction=='d'){ //Abajo
   	P.insert(P.begin(),Obj(P[0].x,P[0].y+1));
   }
+
   	move(P[0].y,P[0].x);
   	addch(partchar);
   	refresh();
 }
 Character::Character(){
   initscr(); //inicializar pantalla
-  nodelay(stdscr,true); //No espera key
+  nodelay(stdscr,false); //No espera key
   keypad(stdscr,true); //habilita teclado
   noecho(); //no escribe
   curs_set(0); //cursor invisible
