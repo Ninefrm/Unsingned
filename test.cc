@@ -21,32 +21,37 @@ int main(){
   startx=(COLS - width)/2;
   refresh();
 
+  printw("UNSINGNED");
+  printw("FUCK U");
+  refresh();
   screen=new_win(height,width,startx,starty);
   keypad(screen,TRUE);
-  mvprintw(0,0,"UNSINGNED");
-  refresh();
-  while((key = getch()) != KEY_F(1))
-  	{	switch(key)
-  		{	case KEY_LEFT:
+  delwin(screen);
+  do{
+    key=wgetch(screen);
+    switch(key){
+      case KEY_LEFT:
   				destroy_win(screen);
   				screen = new_win(height, width, starty,--startx);
-  				break;
-  			case KEY_RIGHT:
+          printw("PRESIONASTE IZQUIERDA");
+  			break;
+  		case KEY_RIGHT:
   				destroy_win(screen);
   				screen = new_win(height, width, starty,++startx);
-  				break;
-  			case KEY_UP:
+          printw("DERECHA");
+  			break;
+  		case KEY_UP:
   				destroy_win(screen);
   				screen = new_win(height, width, --starty,startx);
-  				break;
-  			case KEY_DOWN:
+          printw("ARRIBA");
+  			break;
+  		case KEY_DOWN:
   				destroy_win(screen);
   				screen = new_win(height, width, ++starty,startx);
-  				break;
+          printw("ABAJO");
+  			break;
   		}
-  	}
-
-
+    }while((key=getch())!=KEY_BREAK);
   endwin();
   return 0;
 }
