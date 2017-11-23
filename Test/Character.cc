@@ -74,7 +74,7 @@ void Character::moveCharacter(){
     move(P[P.size()-1].y, P[P.size()-1].x);
     printw(" ");
     refresh();
-    P.pop_back();
+    //P.pop_back();
   }
 
   if(direction=='l'){ //Cuando es Izquierda
