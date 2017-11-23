@@ -71,7 +71,7 @@ void Character::moveCharacter(){
   		break;
   }
   if(!get){
-    move(P[P.size()-1].y, P[P.size()-1].x);
+    //move(P[P.size()-1].y, P[P.size()-1].x);
     printw(" ");
     refresh();
     P.pop_back();
