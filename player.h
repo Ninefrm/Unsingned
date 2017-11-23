@@ -1,33 +1,33 @@
+/*
+Define el comportamiento del jugador
+Jorge Salazar Ramirez
+*/
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-#include "Figther"
-#include "Point"
 #include <vector>
-#include "Pacific"
+#include "figther.h"
+#include "point.h"
+#include "pacific.h"
+
 
 class Player:public Figther{
-
 public:
   Player();
-  ~Player();
-  void level_up();
-  int get_level();
-  int get_xp();
-  void boost_xp( int );
-  int get_karma();
-  void add_karma( int );
+  ~Player(){};
 
+  int get_level() const;//Regresa el nivel del jugador
+  int get_karma() const;//Regresa el karma del jugador
+  int get_xp() const;//Regresa los puntos de expereiencia del jugador
 
+  void level_up();//Aumenta el nivel del jugador
+  void boost_xp( unsigned int );//Aumenta la expereiencia del jugador
+  void add_karma( int );//Suma el entero al karma del jugador
 private:
   int xp;
   int level;
   int karma;
-
-protected:
-
-
+  const int max_level = 100; //Define el nivel maximo a alcanzar
 };
-
 
 #endif

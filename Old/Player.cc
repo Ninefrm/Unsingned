@@ -1,15 +1,7 @@
 #include "Player.h"
 
   Player::Player(){
-    std::string m_name("Unknow");
-    m_Damage=5;
-    m_AttackSpeed=1;
-    m_Life=100;
-    m_Armor=3;
-    m_MagicResist=3;
-  }
-  Player::Player(std::string name):Player(){
-    m_name+=name;
+    std::string m_name("Unsingned");
     m_Damage=5;
     m_AttackSpeed=1;
     m_Life=100;

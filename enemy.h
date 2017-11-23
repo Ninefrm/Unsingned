@@ -1,19 +1,19 @@
-#ifndef _ENEMY_
-#define _ENEMY_
+/*
+Por el momento no es necesaria
+*/
+#ifndef _ENEMY_H_
+#define _ENEMY_H_
 
-#include "Figther"
-#include "Point"
+#include "figther.h"
+#include "point.h"
+#include "pacific.h"
 #include <vector>
-#include "Pacific"
 
 class Enemy:public Figther{
-
-
 public:
 private:
 protected:
-
-}
+};
 
 
 #endif
