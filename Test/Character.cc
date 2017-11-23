@@ -2,14 +2,6 @@
 
 using namespace std;
 
-Obj::Obj(int col, int row){
-  x=col;
-  y=row;
-}
-Obj::Obj(){
-  x=0;
-  y=0;
-}
 void Character::putObj(){
     while(1){
   		int tmpx=rand()%maxwidth+1;
@@ -31,11 +23,12 @@ bool Character::collision(){
   if(P.x==Up.x && P.y==Up.y){
   	//get=true;
   	putObj();
-		points+=10;
+		//points+=10;
 		move(maxheight-1,0);
   	printw("%d",points);
-		if((points%100)==0)
-			del-=10000;
+		/*if((points%100)==0)
+			del-=10000;*/
+    return true;
   }else
   	get=false;
   	return false;

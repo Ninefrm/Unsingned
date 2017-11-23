@@ -1,17 +1,7 @@
 #ifndef _CHARACTER_H_
 #define _CHARACTER_H_
 
-#include <iostream>
-#include <vector>
-#include <curses.h>
-#include <cstdlib>
-#include <unistd.h>
-
-struct Obj{
-  int x,y;
-  Obj(int col, int row);
-  Obj();
-};
+#include "obj.h"
 
 class Character{
     int points, del; //Add/Delete points
@@ -25,6 +15,7 @@ class Character{
     char etel;
     int m_life;
     Obj Up;
+    Obj Bala;
     Obj P; //El personaje
 
     void putObj();
