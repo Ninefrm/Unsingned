@@ -14,9 +14,6 @@ void Character::putObj(){
     while(1){
   		int tmpx=rand()%maxwidth+1;
   		int tmpy=rand()%maxheight+1;
-  		for(int i=0;i<P.size();i++)
-  			if(P[i].x==tmpx && P[i].y==tmpy)
-  				continue;
   		if(tmpx>=maxwidth-2 || tmpy>=maxheight-3)
   			continue;
   		    Up.x=tmpx;
@@ -28,14 +25,10 @@ void Character::putObj(){
   	refresh();
 }
 bool Character::collision(){
-  if(P[0].x==0 || P[0].x==maxwidth-1 || P[0].y==0 || P[0].y==maxheight-2)
+  if(P.x==0 || P.x==maxwidth-1 || P.y==0 || P.y==maxheight-2)
   		return true;
-	for(int i=2;i<P.size();i++){
-  	if(P[0].x==P[i].x && P[0].y==P[i].y)
-  		return true;
-  }
   	//collision con los 1
-  if(P[0].x==Up.x && P[0].y==Up.y){
+  if(P.x==Up.x && P.y==Up.y){
   	//get=true;
   	putObj();
 		points+=10;
@@ -68,26 +61,26 @@ void Character::moveCharacter(){
   		    break;
   	case KEY_BACKSPACE: //Barra para salir
   		direction='q';
+      addch(partchar);
+    	refresh();
   		break;
   }
 
   if(!get){
-    move(P[P.size()-1].y, P[P.size()-1].x);
+    move(P.y, P.x);
     printw(" ");
     refresh();
-    P.pop_back();
   }
   if(direction=='l'){ //Cuando es Izquierda
-    P.insert(P.begin(),Obj(P[0].x-1,P[0].y));
+    P.x--;
   }else if(direction=='r'){ //Derecha
-  	P.insert(P.begin(),Obj(P[0].x+1,P[0].y));
+  	P.x++;
   }else if(direction=='u'){ //Arriba
-  	P.insert(P.begin(),Obj(P[0].x,P[0].y-1));
+  	P.y--;
   }else if(direction=='d'){ //Abajo
-  	P.insert(P.begin(),Obj(P[0].x,P[0].y+1));
+  	P.y++;
   }
-
-  	move(P[0].y,P[0].x);
+  	move(P.y,P.x);
   	addch(partchar);
   	refresh();
 }
@@ -104,7 +97,8 @@ Character::Character(){
   Up.x=0;
   Up.y=0;
   //for(int i=0;i<5;i++)
-  P.push_back(Obj(40,10));
+  P.x=40;
+  P.y=10;
   points=0;
   del=110000;
   get=0;
@@ -134,7 +128,7 @@ Character::Character(){
   }
     //Se creó el margen<-
     //Dibujar personaje ->
-    move(P[0].y,P[0].x);
+    move(P.y,P.x);
     addch(partchar);
   move(maxheight-1,0);
   printw("%d",points);

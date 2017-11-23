@@ -25,7 +25,7 @@ class Character{
     char etel;
     int m_life;
     Obj Up;
-    std::vector<Obj> P; //El personaje
+    Obj P; //El personaje
 
     void putObj();
     bool collision();
