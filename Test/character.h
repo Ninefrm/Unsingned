@@ -2,15 +2,17 @@
 #define _CHARACTER_H_
 
 #include <vector>
-#include <ncurses.h>
+#include <curses.h>
 #include <string>
 #include "point.h"
 
+/*
 struct map{
   int x,y;
   map(int col, int row);
   map();
 };
+*/
 class Character{
   char direction, partchar, oldalchar;
   bool get;

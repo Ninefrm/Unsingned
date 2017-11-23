@@ -1,6 +1,7 @@
 #include "character.h"
 
-map::map(int col, int row){
+
+/*map::map(int col, int row){
   x=col;
   y=row;
 }
@@ -8,6 +9,7 @@ map::map(){
   x=0;
   y=0;
 }
+*/
 Character::Character(){
   initscr();
   nodelay(stdscr,true);
@@ -44,7 +46,7 @@ Character::~Character(){
 }
 
 bool Character::collision(){
-	if(Character.point.x==0 || Character.x==maxwidth-1 || Character.y==0 || Character.y==maxheight-2)
+	if(m_pos.x==0 || m_pos.x==maxwidth-1 || m_pos.y==0 || m_pos.y==maxheight-2)
 	   return true;
 	   get=false;
 	 return false;
@@ -74,15 +76,15 @@ void Character::moveCharacter(){
 			break;
 	}
 	if(direction=='l'){
-		Character.move_x(Character.x-1);
+		move_x(-1);
 	}else if(direction=='r'){
-		Character.move_x(Character.x+1);
+		move_x(1);
 	}else if(direction=='u'){
-		Character.move_y(Character.y-1));
+		move_y(-1);
 	}else if(direction=='d'){
-		Character.move_y(Character.y+1));
+		move_y(1);
 	}
-		move(Character.y,Character.x);
+
 		addch(partchar);
 	refresh();
 }
