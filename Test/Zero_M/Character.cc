@@ -1,13 +1,13 @@
 #include "Character.h"
 
 Character::Character(){
+  getmaxyx(stdscr, maxheight, maxwidth);
   P.x=maxwidth/2;
   P.y=maxheight/2;
-  move(P.y,P.x);
   plus=0;
   minus=0;
   life=3;
-  getmaxyx(stdscr, maxheight, maxwidth);
+
 }
 Character::~Character(){
   nodelay(stdscr,false); //Cerramos

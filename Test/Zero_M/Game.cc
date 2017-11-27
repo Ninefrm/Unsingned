@@ -8,7 +8,7 @@ Game::Game(){
     curs_set(0); //Cursor no visible
     getmaxyx(stdscr, maxheight, maxwidth); //Obtiene el Max (Width/Height), de la pantalla.
     Character P;
-    
+
     //MARGEN
     for(int i=0;i<MaxW()-1;i++){
       move(0,i);
@@ -44,8 +44,9 @@ int Game::MaxH() const{
 }
 void Game::Start(Character &P){
   while(1){
+    getmaxyx(stdscr, maxheight, maxwidth);
     if(P.Collision()){
-      move(maxheight/2,maxwidth/2);
+      move(maxheight/2,maxwidth/2-3);
       printw("GAME OVER");
       break;
     }

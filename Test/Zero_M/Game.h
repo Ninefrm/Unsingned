@@ -3,8 +3,8 @@
 
 #include "Obj.h"
 #include "Character.h"
-#include "Enemy.h"
 #include "Mapa.h"
+#include "Enemy.h"
 
 class Game{
   public:
