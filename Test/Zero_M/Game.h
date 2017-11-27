@@ -12,11 +12,12 @@ class Game{
     ~Game();
     int MaxW() const;
     int MaxH() const;
+    void Start(Character &P);
   private:
+
     int maxwidth; //Ancho maximo
     int maxheight; //Alto maximo
 
     int delay; //Delay de tecla
-    bool quit;
 };
 #endif
