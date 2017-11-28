@@ -2,11 +2,26 @@
 
 UNSINGNED, THE GAME.
 
-<<SOON, December 2017>>
+[Solved]
 
-####  Video game created by:
+* Start.
+* Collision
+* Enemys.
+* Character.
+* Karma.
+
+[WIP]:
+
+* Abilities.
+* Guns.
+* Boss.
+
+[Final Proyect - OOP - DICIS 2017]
+
+####  Videogame created by:
 * Samuelfrm.
 * Zarmirez.
 * Quorthom.
 * VicenteRamirez.
 * Hristam.
+* Wendoly.
