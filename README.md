@@ -8,13 +8,14 @@ UNSINGNED, THE GAME.
 * Collision
 * Enemys.
 * Character.
-* Karma.
+* Karma counter.
 
 [WIP]:
 
 * Abilities.
 * Guns.
 * Boss.
+* Get karma.
 
 [Final Proyect - OOP - DICIS 2017]
 
