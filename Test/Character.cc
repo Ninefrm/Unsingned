@@ -28,7 +28,7 @@ bool Character::collision(){
   	printw("%d",points);
 		/*if((points%100)==0)
 			del-=10000;*/
-    return true;
+    //return true;
   }else
   	get=false;
   	return false;

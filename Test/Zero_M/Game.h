@@ -3,8 +3,7 @@
 
 #include "Obj.h"
 #include "Character.h"
-#include "Mapa.h"
-#include "Enemy.h"
+
 
 class Game{
   public:
@@ -12,9 +11,8 @@ class Game{
     ~Game();
     int MaxW() const;
     int MaxH() const;
-    void Start(Character &P);
+    void Start(Character &P, Enemy &E);
   private:
-
     int maxwidth; //Ancho maximo
     int maxheight; //Alto maximo
 

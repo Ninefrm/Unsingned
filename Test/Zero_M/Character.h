@@ -2,6 +2,7 @@
 #define _CHARACTER_H_
 
 #include "Obj.h"
+#include "Enemy.h"
 
 struct Character{
   public:
@@ -10,7 +11,7 @@ struct Character{
     void MoveCharacter();
     char Empty();
     bool Q();
-    bool Collision();
+    bool Collision(Enemy &E);
   private:
     Obj P;
     int maxwidth; //Ancho maximo

@@ -7,7 +7,6 @@ Character::Character(){
   plus=0;
   minus=0;
   life=3;
-
 }
 Character::~Character(){
   nodelay(stdscr,false); //Cerramos
@@ -51,24 +50,15 @@ char Character::Empty(){
 bool Character::Q(){
     return quit;
 }
-bool Character::Collision(){
+bool Character::Collision(Enemy &E){
   if(P.x==0 || P.x==maxwidth-1 || P.y==0 || P.y==maxheight-2){
-  		return true;
-    }
-  	/*collision con los 1
-  if(P.x==Up.x && P.y==Up.y){
-  	//get=true;
-  	putObj();
-		//points+=10;
-		move(maxheight-1,0);
-  	printw("%d",points);
-		/*if((points%100)==0)
-			del-=10000;
+  	return true;
+  }
+  //Enemy Collision
+  if(P.x==E.coordX() && P.y==E.coordY()){
+    Enemy E;
+    move(maxheight-1,0);
     return true;
-  }else
-  	else{
-  	  return false;
-    }
-}*/
-return false;
+  }
+    return false;
 }

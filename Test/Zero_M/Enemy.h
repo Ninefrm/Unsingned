@@ -2,16 +2,18 @@
 #define _ENEMY_H_
 
 #include "Obj.h"
-#include "Game.h"
-#include "Character.h"
 
 struct Enemy{
   public:
     Enemy();
-    Enemy Enemy_R();
-    ~Enemy();
+    int coordX() const;
+    int coordY() const;
+    int MaxW() const;
+    int MaxH() const;
   private:
-    Obj id_E;
-    char e;
+    Obj E;
+    int maxwidth; //Ancho maximo
+    int maxheight; //Alto maximo
+    char e=64;
 };
 #endif

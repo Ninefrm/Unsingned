@@ -1,31 +1,23 @@
 #include "Enemy.h"
 
 Enemy::Enemy(){
-  id_E.x=0;
-  id_E.y=0;
-  e=64;
-}
-Enemy Enemy::Enemy_R(){
-  Enemy();
+  getmaxyx(stdscr, maxheight, maxwidth);
   while(1){
-    int random_x=rand()%MaxW()+1;
-    int random_y=rand()%MaxH()+1;
-    if(random_x>=MaxW()-2 || random_y>=MaxH()-3)
+    int random_x=rand()%maxwidth+1;
+    int random_y=rand()%maxheight+1;
+    if(random_x>=maxwidth-2 || random_y>=maxheight-3)
       continue;
-        id_E.x=random_x;
-        id_E.y=random_y;
+      E.x=random_x;
+      E.y=random_y;
     break;
   }
-  move(id_E.y,id_E.x);
+  move(E.y,E.x);
   addch(e);
   refresh();
 }
-Enemy::~Enemy(){
-  if(P.x==Up.x && P.y==Up.y){
-    Enemy_R();
-    move(MaxH()-1,0);
-    return true;
-  }else
-    get=false;
-    return false;
+int Enemy::coordX() const{
+  return E.x;
+}
+int Enemy::coordY() const{
+  return E.y;
 }
