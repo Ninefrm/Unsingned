@@ -18,7 +18,7 @@ struct Character{
     int maxheight; //Alto maximo
     char c='0';
     char empty=(char)129;
-    int life=0;
+    int life=3;
     int plus=0;
     int minus=0;
     bool quit=false;

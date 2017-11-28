@@ -47,7 +47,7 @@ void Character::MoveCharacter(){
     move(P.y,P.x);
     addch(c);
     move(maxheight-1,0);
-    printw("Plus: %d, Minus: %d",plus, minus);
+    printw("Plus: %d, Minus: %d, Life: %d",plus, minus, life);
     refresh();
 }
 char Character::Empty(){
@@ -66,12 +66,15 @@ bool Character::Collision(Enemy &E){
   }
   //Enemy Collision
   if(P.x==E.coordX() && P.y==E.coordY()){
-    clear();
-    move(maxheight/2-2,maxwidth/2-7);
-    printw("WASTED");
+    if(P.life==1){
+      clear();
+      move(maxheight/2-2,maxwidth/2-7);
+      printw("WASTED");
+      return true;
+    }
+    P.life--;
     Enemy E;
     move(maxheight-1,0);
-    return true;
   }
     return false;
 }
