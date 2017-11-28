@@ -63,6 +63,8 @@ bool Character::Collision(){
     clear();
     move(maxheight/2-2,maxwidth/2-11);
     printw("WALL COLLISION");
+    beep();
+    flash();
     return true;
   }
   //Enemy Collision
@@ -72,6 +74,8 @@ bool Character::Collision(){
       clear();
       move(maxheight/2-2,maxwidth/2-7);
       printw("WASTED");
+      beep();
+      flash();
       return true;
     }
     else{ //Si no llegó a cero, entonces cambiar de posición al enemigo
@@ -87,6 +91,7 @@ bool Character::Collision(){
       move(E.E.y,E.E.x);
       addch(64);
       refresh();
+      beep();
       return false;
     }
     }

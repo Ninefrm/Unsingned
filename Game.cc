@@ -1,4 +1,3 @@
-//Unsigned
 #include "Game.h"
 
 Game::Game(){
@@ -13,24 +12,7 @@ Game::Game(){
     getch();
     clear();
     Character P;
-    //MARGEN
-    for(int i=0;i<MaxW()-1;i++){
-      move(0,i);
-      addch(P.Empty());
-    }//Izquierda-Horizontal
-    for(int i=0;i<MaxH()-1;i++){
-      move(i,0);
-      addch(P.Empty());
-    }//Abajo-Vertical
-    for(int i=0;i<MaxW()-1;i++){
-      move(MaxH()-2,i);
-      addch(P.Empty());
-    }//Derecha Horizontal
-    for(int i=0;i<MaxH()-1;i++){
-      move(i,MaxW()-2);
-      addch(P.Empty());
-    }
-    //MARGEN
+    Border();
 
     delay=100000;
 
@@ -57,4 +39,24 @@ void Game::Start(Character &P){
     P.MoveCharacter();
     usleep(110000);
   }
+}
+void Game::Border(){
+  //MARGEN
+  for(int i=0;i<MaxW()-1;i++){
+    move(0,i);
+    addch((char)129);
+  }//Izquierda-Horizontal
+  for(int i=0;i<MaxH()-1;i++){
+    move(i,0);
+    addch((char)129);
+  }//Abajo-Vertical
+  for(int i=0;i<MaxW()-1;i++){
+    move(MaxH()-2,i);
+    addch((char)129);
+  }//Derecha Horizontal
+  for(int i=0;i<MaxH()-1;i++){
+    move(i,MaxW()-2);
+    addch((char)129);
+  }
+  //MARGEN
 }
