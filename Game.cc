@@ -14,7 +14,7 @@ Game::Game(){
     Character P;
     Border();
 
-    delay=100000;
+    delay=1000000;
 
     Start(P);
 }
@@ -37,7 +37,6 @@ void Game::Start(Character &P){
       break;
     }
     P.MoveCharacter();
-    usleep(110000);
   }
 }
 void Game::Border(){

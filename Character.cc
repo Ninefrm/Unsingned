@@ -58,8 +58,8 @@ bool Character::Q(){
     return quit;
 }
 bool Character::Collision(){
-  //Colision con el muro
-  if(P.x==0 || P.x==maxwidth-1 || P.y==0 || P.y==maxheight-2){
+  //Colision con el muromusic
+  if(P.x==0 || P.x==maxwidth-2 || P.y==0 || P.y==maxheight-2){
     clear();
     move(maxheight/2-2,maxwidth/2-11);
     printw("WALL COLLISION");
