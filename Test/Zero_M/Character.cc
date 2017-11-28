@@ -7,6 +7,7 @@ Character::Character(){
   plus=0;
   minus=0;
   life=3;
+  srand(time(NULL));
 }
 Character::~Character(){
   nodelay(stdscr,false); //Cerramos
@@ -17,7 +18,7 @@ void Character::MoveCharacter(){
   move(P.y,P.x);
   addch(c);
   move(maxheight-1,0);
-  printw("Plus: %d, Minus: %d",plus, minus);
+  printw("Plus: %d, Minus: %d, Life: %d",plus, minus,life);
   int Key=getch(); //Key Será nuestra tecla oprimida.
   move(P.y,P.x);
   printw(" ");
@@ -47,7 +48,7 @@ void Character::MoveCharacter(){
     move(P.y,P.x);
     addch(c);
     move(maxheight-1,0);
-    printw("Plus: %d, Minus: %d, Life: %d",plus, minus, life);
+    printw("Plus: %d, Minus: %d, Life: %d",plus, minus,life);
     refresh();
 }
 char Character::Empty(){
@@ -56,7 +57,7 @@ char Character::Empty(){
 bool Character::Q(){
     return quit;
 }
-bool Character::Collision(Enemy &E){
+bool Character::Collision(){
   //Colision con el muro
   if(P.x==0 || P.x==maxwidth-1 || P.y==0 || P.y==maxheight-2){
     clear();
@@ -65,16 +66,29 @@ bool Character::Collision(Enemy &E){
     return true;
   }
   //Enemy Collision
-  if(P.x==E.coordX() && P.y==E.coordY()){
-    if(P.life==1){
+  if(P.x==E.E.x && P.y==E.E.y){
+    life--;
+    if(life==0){ //Si vida llega a 0, termina el juego
       clear();
       move(maxheight/2-2,maxwidth/2-7);
       printw("WASTED");
       return true;
     }
-    P.life--;
-    Enemy E;
-    move(maxheight-1,0);
-  }
+    else{ //Si no llegó a cero, entonces cambiar de posición al enemigo
+      while(1){
+        int random_x=rand()%maxwidth+1;
+        int random_y=rand()%maxheight+1;
+        if(random_x>=maxwidth-2 || random_y>=maxheight-3)
+          continue;
+          E.E.x=random_x;
+          E.E.y=random_y;
+        break;
+      }
+      move(E.E.y,E.E.x);
+      addch(64);
+      refresh();
+      return false;
+    }
+    }
     return false;
 }

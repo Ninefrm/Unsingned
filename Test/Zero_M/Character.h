@@ -11,7 +11,8 @@ struct Character{
     void MoveCharacter();
     char Empty();
     bool Q();
-    bool Collision(Enemy &E);
+    bool Collision();
+    Enemy E;
   private:
     Obj P;
     int maxwidth; //Ancho maximo

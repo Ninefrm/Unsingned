@@ -11,7 +11,7 @@ class Game{
     ~Game();
     int MaxW() const;
     int MaxH() const;
-    void Start(Character &P, Enemy &E);
+    void Start(Character &P);
   private:
     int maxwidth; //Ancho maximo
     int maxheight; //Alto maximo

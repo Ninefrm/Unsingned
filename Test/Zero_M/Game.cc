@@ -12,7 +12,6 @@ Game::Game(){
     getch();
     clear();
     Character P;
-    Enemy E;
     //MARGEN
     for(int i=0;i<MaxW()-1;i++){
       move(0,i);
@@ -34,7 +33,7 @@ Game::Game(){
 
     delay=100000;
 
-    Start(P,E);
+    Start(P);
 }
 Game::~Game(){
   nodelay(stdscr,false); //cerrar
@@ -46,10 +45,10 @@ int Game::MaxW() const{
 int Game::MaxH() const{
   return maxheight;
 }
-void Game::Start(Character &P,Enemy &E){
+void Game::Start(Character &P){
   while(1){
     getmaxyx(stdscr, maxheight, maxwidth);
-    if(P.Collision(E)){
+    if(P.Collision()){
       move(maxheight/2-1,maxwidth/2-9);
       printw("GAME OVER");
       break;

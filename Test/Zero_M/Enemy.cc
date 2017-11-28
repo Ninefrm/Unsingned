@@ -15,9 +15,3 @@ Enemy::Enemy(){
   addch(e);
   refresh();
 }
-int Enemy::coordX() const{
-  return E.x;
-}
-int Enemy::coordY() const{
-  return E.y;
-}
