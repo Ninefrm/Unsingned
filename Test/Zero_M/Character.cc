@@ -14,6 +14,10 @@ Character::~Character(){
   endwin(); //Cerrar ventana
 }
 void Character::MoveCharacter(){
+  move(P.y,P.x);
+  addch(c);
+  move(maxheight-1,0);
+  printw("Plus: %d, Minus: %d",plus, minus);
   int Key=getch(); //Key Será nuestra tecla oprimida.
   move(P.y,P.x);
   printw(" ");
@@ -42,6 +46,8 @@ void Character::MoveCharacter(){
   }
     move(P.y,P.x);
     addch(c);
+    move(maxheight-1,0);
+    printw("Plus: %d, Minus: %d",plus, minus);
     refresh();
 }
 char Character::Empty(){
@@ -51,11 +57,18 @@ bool Character::Q(){
     return quit;
 }
 bool Character::Collision(Enemy &E){
+  //Colision con el muro
   if(P.x==0 || P.x==maxwidth-1 || P.y==0 || P.y==maxheight-2){
-  	return true;
+    clear();
+    move(maxheight/2-2,maxwidth/2-11);
+    printw("WALL COLLISION");
+    return true;
   }
   //Enemy Collision
   if(P.x==E.coordX() && P.y==E.coordY()){
+    clear();
+    move(maxheight/2-2,maxwidth/2-7);
+    printw("WASTED");
     Enemy E;
     move(maxheight-1,0);
     return true;

@@ -7,6 +7,10 @@ Game::Game(){
     noecho(); //No sale lo que escribes
     curs_set(0); //Cursor no visible
     getmaxyx(stdscr, maxheight, maxwidth); //Obtiene el Max (Width/Height), de la pantalla.
+    move(maxheight/2-2,maxwidth/2-17);
+    printw("READY PLAYER ONE?, press a key");
+    getch();
+    clear();
     Character P;
     Enemy E;
     //MARGEN
@@ -46,7 +50,7 @@ void Game::Start(Character &P,Enemy &E){
   while(1){
     getmaxyx(stdscr, maxheight, maxwidth);
     if(P.Collision(E)){
-      move(maxheight/2,maxwidth/2-3);
+      move(maxheight/2-1,maxwidth/2-9);
       printw("GAME OVER");
       break;
     }
