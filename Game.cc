@@ -41,20 +41,20 @@ void Game::Start(Character &P){
 }
 void Game::Border(){
   //MARGEN
-  for(int i=0;i<MaxW()-1;i++){
+  for(int i=0;i<78;i++){
     move(0,i);
     addch((char)129);
   }//Izquierda-Horizontal
-  for(int i=0;i<MaxH()-1;i++){
+  for(int i=0;i<22;i++){
     move(i,0);
     addch((char)129);
   }//Abajo-Vertical
-  for(int i=0;i<MaxW()-1;i++){
-    move(MaxH()-2,i);
+  for(int i=0;i<79;i++){
+    move(23,i);
     addch((char)129);
   }//Derecha Horizontal
-  for(int i=0;i<MaxH()-1;i++){
-    move(i,MaxW()-2);
+  for(int i=0;i<22;i++){
+    move(i,78);
     addch((char)129);
   }
   //MARGEN

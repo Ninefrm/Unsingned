@@ -154,11 +154,11 @@ Bullet::Bullet(int x0, int y0, int xs, int ys, char d, bool e){
    enemy = e;
 }
 
-Bullet::xpos() const{
+int Bullet::xpos() const{
    return x;
 }
 
-Bullet::ypos() const{
+int Bullet::ypos() const{
    return y;
 }
 
