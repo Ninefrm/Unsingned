@@ -6,8 +6,11 @@
 #include "Wall.h"
 #include "Player.h"
 #include "Mapa.h"
+#include "Sword.h"
 #include <vector>
 #include <curses.h>
+#include <random>
+#include <ctime>
 
 class Game{
 public:
@@ -21,7 +24,9 @@ private:
    Player player;
    const int max_w = 79;
    const int max_h = 23;
-   bool end;
+   bool end, colision;
    std::vector<Mapa> maps;
+   std::mt19937 motor;
+   std::bernoulli_distribution coin;
 };
 #endif

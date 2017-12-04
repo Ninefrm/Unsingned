@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <random>
+#include <curses.h>
 #include <ctime>
 #include "Obj.h"
 #include "Wall.h"
@@ -12,13 +13,16 @@
 class Mapa{
   public:
     Mapa();
-    Mapa(Character&, std::vector<Wall>);
+    Mapa(Character* , std::vector<Wall>);
     bool wall_colision() const;//Verifica si el jugador colisiona con alguo de los muros
     bool wall_colision(int, int) const;//Verifica si la posicion (x, y) colisiona con alguno de los muros
     bool outside() const;
+    bool enemys_colision();
     void generate_enemy();
     void move_enemys();
-    void start();//Dibuja los muros
+    void move_agresive();
+    void draw_walls();//Dibuja los muros
+    void draw_enemys();
 
   private:
     int rows;
@@ -28,7 +32,7 @@ class Mapa{
     std::uniform_int_distribution<int> rand_y;
     std::uniform_int_distribution<int> rand_mov;
     std::vector<Wall> walls;
-    Character player;
+    Character* player;
     Enemy enemys;
     bool inside;
 };

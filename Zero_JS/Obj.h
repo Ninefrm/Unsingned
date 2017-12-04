@@ -6,7 +6,7 @@
 class Obj{
 public:
    Obj();
-   Obj(int, int, char);
+   Obj(int, int, char);//Objeto se construye con fila columna y textura
    virtual ~Obj() {};
 
    int x_pos() const;//Consulta la fila/y

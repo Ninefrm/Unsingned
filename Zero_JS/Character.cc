@@ -26,11 +26,11 @@ void Character::heal(){
    _life = _max_life;
 }
 
-void Character::add_life(int h){
+void Character::add_life(const int h){
    _life += h;
 }
 
-void Character::add_max_life(int h){
+void Character::add_max_life(const int h){
    _max_life += h;
 }
 

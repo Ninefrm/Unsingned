@@ -11,17 +11,19 @@ Wall::Wall(int w, int z, char brick, int r, int c) : Obj(w, z, brick){
 }
 
 void Wall::draw() const{
-   for(size_t i = 0; i < rows; i++){
-      for(size_t j = 0; j < cols; j++){
+   for(size_t i = 0; i <= rows; i++){
+      for(size_t j = 0; j <= cols; j++){
          mvaddch(y + i, x + j, texture);
       }
    }
 }
 
 bool Wall::collision(int xp, int yp) const{
-   if(xp < x || xp > x + cols) return false;
-   if(yp < y || yp > y + rows) return false;
-   return true;
+   if(x <= xp && xp <= x + cols && y <= yp && yp <= y + rows){
+      mvaddch(yp, xp, texture);
+      return true;
+   }
+   return false;
 }
 
 bool Wall::collision(const Character& p) const{
