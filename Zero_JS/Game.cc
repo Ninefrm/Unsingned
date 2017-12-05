@@ -21,14 +21,14 @@ Game::Game(){
    w.push_back(Wall(5, 20, ':', 20, 0));
    w.push_back(Wall(3, 1, ':', 0, 35));
    w.push_back(Wall(31, 4, ':', 0, 20));
-   maps.push_back(Mapa(&player, w, 32, 61));
+   maps.push_back(Mapa(&player, w, 33, 61));
    w.resize(5);
    w[0] = Wall(0, 0, char(129), 0, 61);
    w[1] = Wall(1, 0, char(129), 29, 0);
    w[2] = Wall(1, 61, char(129), 32, 0);
    w[3] = Wall(33, 0, char(129), 0, 61);
    w[5] = Wall(20, 3, '&', 4, 4);
-   maps.push_back(Mapa(&player, w, 30, 61));
+   maps.push_back(Mapa(&player, w, 33, 61));
 }
 
 Game::~Game(){
