@@ -2,16 +2,19 @@
 #define SWORD_H
 
 #include "Obj.h"
+#include "Character.h"
 
 class Sword : public Obj{
 public:
    Sword();
-   Sword(int, const Obj&);
+   Sword(int, Character*);
    ~Sword(){ };
-   Obj use(int);
    int damage() const;
+   void use(int);
 private:
    int _damage;
+   Character* user;
+   char dir;
 };
 
 #endif

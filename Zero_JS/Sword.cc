@@ -1,33 +1,38 @@
 #include "Sword.h"
 
-Sword::Sword() : Obj(-1, -1, '/') { };
-
-Sword::Sword(int d, const Obj& p) {//p se utiliza para saber donde se mostrara el arma
-   x = p.x_pos();
-   y = p.y_pos();
-   _damage = d;
+Sword::Sword() : Obj(-1, -1, '/') {
+   _damage = 0;
+   user = nullptr;
+   dir = 0;
 }
 
-Obj Sword::use(int key){
-   int px = x_pos(),
-       py = y_pos();
-   switch (key) {
-      case 'w':
-         py--;
-         break;
-      case 's':
-         py++;
-         break;
-      case 'a':
-         px--;
-         break;
-      case 'd':
-         px++;
-         break;
-   }
-   return Obj(px, py, texture);
+Sword::Sword(int d, Character* u) {
+   x = u->x_pos();
+   y = u->y_pos();
+   _damage = d;
+   texture = '/';
+   dir = 0;
 }
 
 int Sword::damage() const{
    return _damage;
+}
+
+void Sword::use(int key){
+   x = user->x_pos();
+   y = user->y_pos();
+   switch (key) {
+      case 'w':
+         --y;
+         return;
+      case 's':
+         ++y;
+         return;
+      case 'a':
+         --x;
+         return;
+      case 'd':
+         ++x;
+         return;
+   }
 }

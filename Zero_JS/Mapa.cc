@@ -2,15 +2,15 @@
 
 Mapa::Mapa(){
    player = nullptr;
-   rows = 80;
-   cols = 40;
+   rows = 60;
+   cols = 30;
 }
 
-Mapa::Mapa(Character* p, std::vector<Wall> w){
+Mapa::Mapa(Character* p, std::vector<Wall> w, int r, int c){
    player = p;
    walls = w;
-   rows = 40;
-   cols = 60;
+   rows = r;
+   cols = c;
    int x = p->x_pos(), y = p->y_pos();
    inside = (0 < x && x < cols && 0 < y && y < rows);
    motor.seed(time(nullptr));
@@ -26,7 +26,7 @@ void Mapa::draw_walls(){
 }
 
 bool Mapa::wall_colision() const{
-   for(int i = 0; i < walls.size(); i++){
+   for(size_t i = 0; i < walls.size(); i++){
       if(walls[i].collision(*player)){
          return true;
       }
@@ -35,7 +35,7 @@ bool Mapa::wall_colision() const{
 }
 
 bool Mapa::wall_colision(int xp, int yp) const{
-   for(int i = 0; i < walls.size(); i++){
+   for(size_t i = 0; i < walls.size(); i++){
       if(walls[i].collision(xp, yp)){
          return true;
       }
@@ -45,7 +45,7 @@ bool Mapa::wall_colision(int xp, int yp) const{
 
 bool Mapa::outside() const{
    int xp = player->x_pos(), yp = player->y_pos();
-   return (0 < xp && xp < cols && 0 < yp && yp < rows);
+   return !(0 < xp && xp < cols && 0 < yp && yp < rows);
 }
 
 void Mapa::generate_enemy(){
@@ -63,7 +63,10 @@ void Mapa::generate_enemy(){
 }
 
 void Mapa::move_enemys(){
-    int x = enemys.x_pos(),
+   if(enemys.life() <= 0){
+      return;
+   }
+   int x = enemys.x_pos(),
            y = enemys.y_pos(),
            mx = rand_mov(motor),
            my = rand_mov(motor);
@@ -91,6 +94,9 @@ void Mapa::move_enemys(){
 }
 
 void Mapa::move_agresive(){
+   if(enemys.life() <= 0){
+      return;
+   }
    if(enemys.in_range(*player)){
       mvaddch(enemys.y_pos(), enemys.x_pos(), ' ');
       enemys.stalk(*player);
@@ -99,6 +105,9 @@ void Mapa::move_agresive(){
 }
 
 bool Mapa::enemys_colision(){
+   if(enemys.life() <= 0){
+      return false;
+   }
    bool c = (player->x_pos() == enemys.x_pos() && player->y_pos() == enemys.y_pos());
    if(c){
       player->add_life(-enemys.damage());
@@ -106,6 +115,20 @@ bool Mapa::enemys_colision(){
    return c;
 }
 
+bool Mapa::enemys_colision(const Obj& w, int dmg){
+   if(enemys.life() <= 0){
+      return false;
+   }
+   bool c = (w.x_pos() == enemys.x_pos() && w.y_pos() == enemys.y_pos());
+   if(c){
+      enemys.add_life(-dmg);
+   }
+   return c;
+}
+
 void Mapa::draw_enemys(){
+   if(enemys.life() <= 0){
+      return;
+   }
    enemys.draw();
 }

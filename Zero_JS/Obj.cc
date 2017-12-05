@@ -23,3 +23,7 @@ int Obj::x_pos() const{
 void Obj::draw() const{
    mvaddch(y, x, texture);
 }
+
+char Obj::txt() const{
+   return texture;
+}

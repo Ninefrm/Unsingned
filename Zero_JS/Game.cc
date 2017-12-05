@@ -8,23 +8,31 @@ Game::Game(){
    noecho(); //No sale lo que escribes
    curs_set(0); //Cursor no visible
    player = Player(12, 12);
+   player.take(Sword(10, &player));
    motor.seed(time(nullptr));
    coin = std::bernoulli_distribution(0.5);
    end = false;
    std::vector<Wall> w;
-   w.push_back(Wall(1, 0, char(129), 0, 61));
-   w.push_back(Wall(2, 0, char(129), 40, 0));
-   w.push_back(Wall(2, 61, char(129), 40, 0));
-   w.push_back(Wall(43, 0, char(129), 0, 61));
+   w.push_back(Wall(0, 0, char(129), 0, 61));
+   w.push_back(Wall(1, 0, char(129), 31, 0));
+   w.push_back(Wall(1, 61, char(129), 29, 0));
+   w.push_back(Wall(33, 0, char(129), 0, 61));
    w.push_back(Wall(15, 1, '#', 5, 10));
    w.push_back(Wall(5, 20, ':', 20, 0));
-   w.push_back(Wall(3, 1, ':', 0, 45));
-   w.push_back(Wall(41, 4, ':', 0, 20));
-   maps.resize(1);
-   maps[0] = Mapa(&player, w);
+   w.push_back(Wall(3, 1, ':', 0, 35));
+   w.push_back(Wall(31, 4, ':', 0, 20));
+   maps.push_back(Mapa(&player, w, 32, 61));
+   w.resize(5);
+   w[0] = Wall(0, 0, char(129), 0, 61);
+   w[1] = Wall(1, 0, char(129), 29, 0);
+   w[2] = Wall(1, 61, char(129), 32, 0);
+   w[3] = Wall(33, 0, char(129), 0, 61);
+   w[5] = Wall(20, 3, '&', 4, 4);
+   maps.push_back(Mapa(&player, w, 30, 61));
 }
 
 Game::~Game(){
+   curs_set(1);
    nodelay(stdscr,false); //cerrar
    endwin();
 }
@@ -39,35 +47,47 @@ void Game::start(){
 
 void Game::loop(){
    int key = 0, prev_x, prev_y;
+   Mapa *curr_map = &maps[0];
    maps[0].draw_walls();
    maps[0].generate_enemy();
    do{
       prev_x = player.x_pos();
       prev_y = player.y_pos();
-      mvprintw(0, 0, "(-): %3d (+): %3d (<3): %3d <Input: %3d> <x: %3d> <y: %3d>",
+      mvprintw(35, 0, "(-): %3d (+): %3d (<3): %3d <Input: %3d> <x: %3d> <y: %3d>",
                player.get_minus(), player.get_plus(), player.life(), key, player.x_pos(), player.y_pos());
       if(player.x_pos() < 0 || player.y_pos() < 0){
          break;
       }
+      if(curr_map->outside()){
+         mvprintw(34, 0, "Fuera del mapa ");
+         player.move(12, 12);
+         curr_map = &maps[1];
+         clear();
+         curr_map->draw_walls();
+      }
+      else{
+         mvprintw(34, 0, "Dentro del mapa");
+      }
       player.draw();
       key = getch();
       move_player(key);
-      if(maps[0].wall_colision()){
+      if(curr_map->wall_colision()){
          player.move(prev_y, prev_x);
          player.add_life(-1);
-         maps[0].draw_walls();
+         curr_map->draw_walls();
       }
-      if(maps[0].enemys_colision()){
+
+      if(curr_map->enemys_colision()){
          player.move(prev_y, prev_x);
       }
       end = (player.life() <= 0);
       if(coin(motor)){
-         maps[0].move_agresive();
+         curr_map->move_agresive();
       }
       else{
-         maps[0].move_enemys();
+         curr_map->move_enemys();
       }
-      maps[0].draw_enemys();
+      curr_map->draw_enemys();
       refresh();
    }while(!end);
    clear();
@@ -93,6 +113,24 @@ void Game::move_player(int key){
    }
 }
 
+void Game::atack(int key){
+   if(key != 'w' && key != 's' && key != 'a' && key != 'd'){
+      return;
+   }
+   /*
+   static Sword w;
+   player.atack(key);
+   w = player.sword();
+   mvprintw(34, 0, "Sword <x:%3d> <y:%3d>", w.x_pos(), w.y_pos());
+   if(maps[0].wall_colision(w.x_pos(), w.y_pos())){
+      return;
+   }
+   if(maps[0].enemys_colision(w, w.damage())){
+      return;
+   }
+   w.draw();
+   */
+}
 
 /*
 Game::Game(){

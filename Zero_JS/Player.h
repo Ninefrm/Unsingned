@@ -12,10 +12,11 @@ public:
    ~Player() { };
    int get_plus() const;
    int get_minus() const;
+   Sword sword() const;
    void add_plus(int);
    void add_minus(int);
-   Obj atack(int);
-   void take(Sword&);
+   void take(const Sword&);
+   void atack(int);
 private:
    int plus;
    int minus;
