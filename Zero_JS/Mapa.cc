@@ -49,6 +49,9 @@ bool Mapa::outside() const{
 }
 
 void Mapa::generate_enemy(){
+   if(enemys.size() == max_n_enemys){
+      return;
+   }
    int x = rand_x(motor),
        y = rand_y(motor);
    for(int i = 0; i < walls.size(); i++){
@@ -58,77 +61,126 @@ void Mapa::generate_enemy(){
          break;
       }
    }
-   enemys = Enemy(y, x, '@', 100, 8);
-   enemys.draw();
+   enemys.push_back(Enemy(y, x, '@', 100, 8));
+   draw_enemys();
 }
 
-void Mapa::move_enemys(){
-   if(enemys.life() <= 0){
-      return;
-   }
-   int x = enemys.x_pos(),
-           y = enemys.y_pos(),
+void Mapa::move_enemy(Enemy& enemy){
+   int x = enemy.x_pos(),
+           y = enemy.y_pos(),
            mx = rand_mov(motor),
            my = rand_mov(motor);
 
    if(!wall_colision(x + mx, y + my)){
-       mvaddch(enemys.y_pos(), enemys.x_pos(), ' ');
-       enemys.move_x(mx);
-       enemys.move_y(my);
+       mvaddch(enemy.y_pos(), enemy.x_pos(), ' ');
+       enemy.move_x(mx);
+       enemy.move_y(my);
     }
     else if(!wall_colision(x - mx, y + my)){
-       mvaddch(enemys.y_pos(), enemys.x_pos(), ' ');
-       enemys.move_x(-mx);
-       enemys.move_y(my);
+       mvaddch(enemy.y_pos(), enemy.x_pos(), ' ');
+       enemy.move_x(-mx);
+       enemy.move_y(my);
     }
     else if(!wall_colision(x + mx, y - my)){
-      mvaddch(enemys.y_pos(), enemys.x_pos(), ' ');
-      enemys.move_x(mx);
-      enemys.move_y(-my);
+      mvaddch(enemy.y_pos(), enemy.x_pos(), ' ');
+      enemy.move_x(mx);
+      enemy.move_y(-my);
     }
     else if(!wall_colision(x - mx, y - my)){
-      mvaddch(enemys.y_pos(), enemys.x_pos(), ' ');
-      enemys.move_x(-mx);
-      enemys.move_y(-my);
+      mvaddch(enemy.y_pos(), enemy.x_pos(), ' ');
+      enemy.move_x(-mx);
+      enemy.move_y(-my);
     }
+}
+
+void Mapa::move_enemys(){
+   if(enemys.empty()){
+      return;
+   }
+   for(auto it = enemys.begin(); it != enemys.end(); ++it){
+      if(it->life() == 0){
+         continue;
+      }
+      move_enemy(*it);
+   }
 }
 
 void Mapa::move_agresive(){
-   if(enemys.life() <= 0){
+   if(enemys.empty()){
       return;
    }
-   if(enemys.in_range(*player)){
-      mvaddch(enemys.y_pos(), enemys.x_pos(), ' ');
-      enemys.stalk(*player);
+   for(auto it = enemys.begin(); it != enemys.end(); ++it){
+      if(it->in_range(*player)){
+         mvaddch(it->y_pos(), it->x_pos(), ' ');
+         it->stalk(*player);
+         return;
+      }
    }
-   return;
 }
 
 bool Mapa::enemys_colision(){
-   if(enemys.life() <= 0){
+   if(enemys.empty()){
       return false;
    }
-   bool c = (player->x_pos() == enemys.x_pos() && player->y_pos() == enemys.y_pos());
-   if(c){
-      player->add_life(-enemys.damage());
+   bool c = false;
+   int xp = player->x_pos(),
+       yp = player->y_pos();
+   for(auto it = enemys.begin(); it != enemys.end(); ++it){
+      if(xp == it->x_pos() && yp == it->y_pos() && it->life() > 0){
+        c = true;
+        player->add_life(-it->damage());
+        break;
+      }
    }
    return c;
 }
 
 bool Mapa::enemys_colision(const Obj& w, int dmg){
-   if(enemys.life() <= 0){
+   if(enemys.empty()){
       return false;
    }
-   bool c = (w.x_pos() == enemys.x_pos() && w.y_pos() == enemys.y_pos());
-   if(c){
-      enemys.add_life(-dmg);
+   bool c = false;
+   int xp = w.x_pos(),
+       yp = w.y_pos();
+   for(auto it = enemys.begin(); it != enemys.end(); ++it){
+      if(xp == it->x_pos() && yp == it->y_pos() && it->life() > 0){
+         c = true;
+         it->add_life(-dmg);
+         break;
+      }
    }
    return c;
 }
 
 void Mapa::draw_enemys(){
-   if(enemys.life() <= 0){
+   remove_dead();
+   if(enemys.empty()){
       return;
    }
-   enemys.draw();
+   for(auto it = enemys.begin(); it != enemys.end(); ++it){
+      it->draw();
+   }
+}
+
+void Mapa::remove_dead(){
+   if(enemys.empty()){
+      return;
+   }
+   for(auto it = enemys.begin(); it != enemys.end(); ++it){
+      if(it->life() <= 0){
+         mvaddch(it->y_pos(), it->x_pos(), ' ');
+         enemys.erase(it);
+         continue;
+      }
+   }
+}
+
+void Mapa::remove_enemys(){
+   if(enemys.empty()){
+      return;
+   }
+   for(auto it = enemys.begin(); it != enemys.end(); ++it){
+      mvaddch(it->y_pos(), it->x_pos(), ' ');
+   }
+   enemys.clear();
 }
