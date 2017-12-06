@@ -1,7 +1,8 @@
-#include "Game.h"
+#include"game_control.h"
 
-int main(){
-  Game start;
+int main(void){
+  Game g;
 
   return 0;
+
 }

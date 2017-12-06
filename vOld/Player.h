@@ -1,43 +1,33 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-//librerias
-#include <string>
+#include "Figther"
+#include "Point"
 #include <vector>
-#include <iostream>
-//
+#include "Pacific"
 
-struct Player{
-  public:
-    Player();
+class Player:public Figther{
 
-    ~Player();
+public:
+  Player();
+  ~Player();
+  void level_up();
+  int get_level();
+  int get_xp();
+  void boost_xp( int );
+  int get_karma();
+  void add_karma( int );
 
-    const double Damage() const;
-    const double AttackSpeed() const;
-    const double Life() const;
-    const double Armor() const;
-    const double MagicResist() const;
-    const std::string Name() const;
 
-    double Damage(double value);
-    double AttackSpeed(double value);
-    double Life(double value);
-    double Armor(double value);
-    double MagicResist(double value);
-    std::string Name(std::string Name);
+private:
+  int xp;
+  int level;
+  int karma;
 
-  private:
-    std::string m_name;
+protected:
 
-    double m_Damage;
-    double m_AttackSpeed;
 
-    double m_Life;
-    double m_Armor;
-    double m_MagicResist;
-
-    //std::vector<Guns*> m_array; virtuales
 };
+
 
 #endif
