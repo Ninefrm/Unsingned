@@ -43,31 +43,19 @@ Sword Player::sword() const{
 }
 
 Sword Player::atack(int key){
-  int xP, yP;
 
-  switch (key) {
-    case 'w':
-    xP = x;
-    yP = y-1;
-    break;
+  armament.set_pos(key);
 
-    case 's':
-    xP = x;
-    yP = y+1;
-    break;
+  armament.draw();
 
-    case 'a':
-    xP = x-1;
-    yP = y;
-    break;
+  mvaddch(armament.get_y_prev(), armament.get_x_prev(), ' ');
 
-    case 'd':
-    xP = x+1;
-    yP = y;
-    break;
-  }
 
-  //return Sword(xP, yP, armament.txt(), armament.damage());
+
+
+  //mvaddch(armament.y_pos(), armament.x_pos(), ' ');
+
+
   return armament;
 
    /*if(!armed){
