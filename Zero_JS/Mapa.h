@@ -2,6 +2,7 @@
 #define _MAPA_H_
 
 #include <vector>
+#include <list>
 #include <random>
 #include <curses.h>
 #include <ctime>
@@ -10,6 +11,7 @@
 #include "Character.h"
 #include "Enemy.h"
 #include "Sword.h"
+#include <exception>
 
 class Mapa{
   public:
@@ -22,11 +24,14 @@ class Mapa{
     bool enemys_colision(const Obj&, int);
     void generate_enemy();
     void move_enemys();
+    void move_enemy(Enemy&);
     void move_agresive();
     void draw_walls();//Dibuja los muros
     void draw_enemys();
+    void remove_enemys();
 
   private:
+    void remove_dead();//Elimina de la lista los enemigos muertos
     int rows;
     int cols;
     std::mt19937 motor;
@@ -35,7 +40,8 @@ class Mapa{
     std::uniform_int_distribution<int> rand_mov;
     std::vector<Wall> walls;
     Character* player;
-    Enemy enemys;
+    std::list<Enemy> enemys;
+    static const size_t max_n_enemys = 4;
     bool inside;
 };
 

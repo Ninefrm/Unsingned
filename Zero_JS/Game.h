@@ -8,6 +8,7 @@
 #include "Mapa.h"
 #include "Sword.h"
 #include <cctype>
+#include <exception>
 #include <vector>
 #include <curses.h>
 #include <random>
@@ -22,6 +23,7 @@ public:
 private:
    void move_player(int);
    void atack(int);
+   void change_map(Mapa*&);
    int delay; //Delay de tecla
    Player player;
    const int max_w = 79;
