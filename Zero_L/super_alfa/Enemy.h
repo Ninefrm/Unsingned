@@ -17,6 +17,7 @@ public:
 
    bool in_range(const Character&) const;//Verifica si un personaje esta en su rango de ataque
    void stalk(const Character&);//Se mueve hacia las coordenadas del personaje
+   //accesor
    int damage() const;//Consulta el daño que hace
 private:
    int range_x;
