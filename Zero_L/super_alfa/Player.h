@@ -1,18 +1,24 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
+
+//librerias
 #include "Obj.h"
 #include "Character.h"
 #include "Sword.h"
 #include <curses.h>
 #include <ctime>
 
-class Player : public Character {
+class Player : public Character { //Jugador es herencia de la clase derivada de Obj, Character
 public:
-   Player();
+  //constructores
+   Player(); //constructor por defecto
    Player(int, int);
+   //destructores
    ~Player() { };
+   //accesors
    int get_plus() const;
    int get_minus() const;
+   //modificadores
    Sword sword() const;
    void add_plus(int);
    void add_minus(int);

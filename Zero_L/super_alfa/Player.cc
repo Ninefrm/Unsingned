@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player() : Character(50, 50, '0', 100){
+Player::Player() : Character(50, 50, '0', 100){ //constructor por defecto construye un Character
    plus = 0;
    minus = 0;
    armament = Sword();
@@ -49,19 +49,7 @@ Sword Player::atack(int key){
   armament.draw();
 
   mvaddch(armament.get_y_prev(), armament.get_x_prev(), ' ');
-
-
-
-
-  //mvaddch(armament.y_pos(), armament.x_pos(), ' ');
-
+  refresh();
 
   return armament;
-
-   /*if(!armed){
-      mvprintw(35, 0, "Desarmado");
-      return;
-   }
-   mvprintw(35, 0, "Armado   ");
-   armament.use(key);*/
 }

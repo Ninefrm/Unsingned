@@ -7,7 +7,7 @@ Obj::Obj(){ //constructor por defecto
 }
 
 Obj::Obj(int r, int c, char t){ //constructor con especificaciones
-   x = c;
+   x = c; //asignando las coordenadas y textura 
    y = r;
    texture = t;
 }

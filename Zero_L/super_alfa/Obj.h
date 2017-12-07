@@ -5,9 +5,9 @@
 
 class Obj{
 public:
-   Obj();
+   Obj(); //Constructor por defecto de objeto
    Obj(int, int, char);//Objeto se construye con fila columna y textura
-   virtual ~Obj() {};
+   virtual ~Obj() {}; //destructor virtual para las herencias de Objeto
 
    int x_pos() const;//Consulta la fila/y
    int y_pos() const;//Consulta la columna/x

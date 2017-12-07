@@ -1,15 +1,16 @@
 #include "Character.h"
 
-Character::Character() : Obj(1, 1, '?'){
+Character::Character() : Obj(1, 1, '?'){  //se construye character y objeto por defecto
    _max_life = 3;
    _life = 3;
 }
 
-Character::Character(int w, int z, char t, int ml) : Obj(w, z, t){
+Character::Character(int w, int z, char t, int ml) : Obj(w, z, t){ //se especifican valores para construir Obj y Character
    _max_life = ml;
    _life = ml;
 }
 
+//accesors
 int Character::max_life() const{
    return _max_life;
 }
@@ -18,6 +19,7 @@ int Character::life() const{
    return _life;
 }
 
+//modificadores
 void Character::kill(){
    _life = 0;
 }
