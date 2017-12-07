@@ -1,17 +1,26 @@
  #include "Game.h"
 
 Game::Game(){
+
+  //iniciando curses
    initscr(); //inicializar pantalla
    nodelay(stdscr,false); //Espera tecla para moverse
    keypad(stdscr,true); //Habilita el teclado
    timeout(166);//Tiempo de espera de getch antes de regresar error
    noecho(); //No sale lo que escribes
    curs_set(0); //Cursor no visible
+
+   //inicializando al jugador
    player = Player(12, 12); //Inicializa al jugador en las coordenadas 12, 12
    player.take(Sword(100, &player)); //el jugador obtiene la espada
+
+   //inciando numeros aleatorios
    motor.seed(time(nullptr)); // semilla para pseudogeneracionde numeros aleatorios
    coin = std::bernoulli_distribution(0.3); //distribucion de los numeros aleatorio
+
    end = false;
+
+   //creando mapas
    maps.resize(3);
    std::vector<Wall> w(6);
    w[0] = Wall(0, 0, char(129), 0, 61);
@@ -70,9 +79,15 @@ void Game::loop(){
       else{
          mvprintw(34, 0, "Dentro del mapa");
       }
+
+      // el jugador se imprime en pantalla
       player.draw();
+      //key rcomienza a recibir las entradas del teclado
       key = getch();
+      //la funcion de Game mueve al jugador con las flechas direccionales
       move_player(key);
+
+      //uso de la espada, se restringe solo a las teclas w, a, s, d.
       if(key == 'w' || key == 'a' || key == 's' || key == 'd')
       {
         Sword espada = player.atack(key);
@@ -80,20 +95,27 @@ void Game::loop(){
 
         curr_map->enemys_colision(espada);
       }
+
+      //se checa la colision del jugador con muros para cada movimiento
       if(curr_map->wall_colision()){
          player.move(prev_y, prev_x);
          player.add_life(-1);
          curr_map->draw_walls();
       }
+      //se checa la colision de enemuigos con muros para cada movimiento
       if(curr_map->enemys_colision()){
          player.move(prev_y, prev_x);
       }
+
+      //un generador de numeros aleatorio determina la probabilidad de que el enemigo ataque directamente al jugador o siga moviendose aleatoriamente
       if(coin(motor)){
          curr_map->move_agresive();
       }
       else{
          curr_map->move_enemys();
       }
+
+      //exception
       if(coin(motor)){
          try{
             curr_map->generate_enemy();
@@ -102,13 +124,15 @@ void Game::loop(){
             mvprintw(36, 0, "No se pudo generar un enemigo");
          }
       }
+
       if(key == 'q'){
          curr_map->remove_enemys();
       }
       curr_map->draw_enemys();
       refresh();
       end = (player.life() <= 0);
-   }while(!end);
+   }while(!end); //termina el loop
+
    clear();
    flash();
    mvprintw(20, 20,"WASTED!");
