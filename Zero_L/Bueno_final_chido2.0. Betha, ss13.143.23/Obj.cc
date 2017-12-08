@@ -1,3 +1,10 @@
+//Realizado por:
+//Maximiliano Fonseca Romero
+//Hrista Arantxa Martinez Martinez
+//Jorge Salazar Ramirez
+//Wendy Vanessa Bravo Guevara
+//Vicente Ramirez Gonzales
+//Luis David Lopez Zavala
 #include "Obj.h"
 
 Obj::Obj(){ //constructor por defecto
@@ -7,7 +14,7 @@ Obj::Obj(){ //constructor por defecto
 }
 
 Obj::Obj(int r, int c, char t){ //constructor con especificaciones
-   x = c; //asignando las coordenadas y textura 
+   x = c; //asignando las coordenadas y textura
    y = r;
    texture = t;
 }

@@ -1,3 +1,10 @@
+//Realizado por:
+//Maximiliano Fonseca Romero
+//Hrista Arantxa Martinez Martinez
+//Jorge Salazar Ramirez
+//Wendy Vanessa Bravo Guevara
+//Vicente Ramirez Gonzales
+//Luis David Lopez Zavala
 #ifndef _WALL_H_
 #define _WALL_H_
 //librerias

@@ -1,3 +1,10 @@
+//Realizado por:
+//Maximiliano Fonseca Romero
+//Hrista Arantxa Martinez Martinez
+//Jorge Salazar Ramirez
+//Wendy Vanessa Bravo Guevara
+//Vicente Ramirez Gonzales
+//Luis David Lopez Zavala
 #ifndef _CHARACTER_H_
 #define _CHARACTER_H_
 //librerias

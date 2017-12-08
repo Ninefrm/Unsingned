@@ -1,3 +1,10 @@
+//Realizado por:
+//Maximiliano Fonseca Romero
+//Hrista Arantxa Martinez Martinez
+//Jorge Salazar Ramirez
+//Wendy Vanessa Bravo Guevara
+//Vicente Ramirez Gonzales
+//Luis David Lopez Zavala
 #include "Player.h"
 
 Player::Player() : Character(50, 50, '0', 100){ //constructor por defecto construye un Character

@@ -1,3 +1,10 @@
+//Realizado por:
+//Maximiliano Fonseca Romero
+//Hrista Arantxa Martinez Martinez
+//Jorge Salazar Ramirez
+//Wendy Vanessa Bravo Guevara
+//Vicente Ramirez Gonzales
+//Luis David Lopez Zavala
 #include "Enemy.h"
 
 Enemy::Enemy() : Character(1, 1, '@', 10){ //constructor de Enemigo
@@ -37,5 +44,5 @@ void Enemy::stalk(const Character& p){ //recibe un apuntador a Character para ve
 }
 //accesor
 int Enemy::damage() const{
-   return _damage; //regresa la cantidad de daño que provoca el enemigo 
+   return _damage; //regresa la cantidad de daño que provoca el enemigo
 }
